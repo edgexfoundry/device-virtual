@@ -1,0 +1,46 @@
+The following open source projects are referenced by the Virtual Device Service:
+
+Spring Boot (Apache 2.0) - https://projects.spring.io/spring-boot/
+https://github.com/spring-projects/spring-boot/blob/master/LICENSE.txt
+
+Spring Framework (Apache 2.0) - http://projects.spring.io/spring-framework/
+https://github.com/spring-projects/spring-framework
+
+Spring Cloud (Apache 2.0) - http://projects.spring.io/spring-cloud/
+https://github.com/spring-cloud/spring-cloud-release/blob/master/LICENSE.txt
+
+GSON (Apache 2.0) - https://github.com/google/gson
+https://github.com/google/gson/blob/master/LICENSE
+
+Snakeyaml (Apache 2.0) - https://bitbucket.org/asomov/snakeyaml
+https://bitbucket.org/asomov/snakeyaml/src/f563667f64835b7d9461b8b4cc7487dbb2f9faf5/LICENSE.txt
+
+H2 Database (Mozilla Public License 2.0) - https://github.com/h2database/h2database
+http://www.h2database.com/html/license.html
+
+Spock Framework (Apache 2.0) - https://github.com/spockframework/spock
+https://github.com/spockframework/spock/blob/master/LICENSE
+
+Groovy (Apache 2.0) - https://groovy.github.io/gmaven/groovy-maven-plugin/xref/index.html
+https://github.com/groovy/gmaven/blob/master/LICENSE.txt
+
+cglib (Apache 2.0) - https://github.com/cglib/cglib
+https://github.com/cglib/cglib/blob/master/LICENSE
+
+Objenesis (Apache 2.0) - https://github.com/easymock/objenesis
+https://github.com/easymock/objenesis/blob/master/LICENSE.txt
+
+Spock Reports Extension (Apache 2.0) - https://github.com/renatoathaydes/spock-reports
+https://github.com/renatoathaydes/spock-reports/blob/master/LICENSE.txt
+
+Hibernate 4.3.1 (LGPL v2.1) - http://hibernate.org/
+http://hibernate.org/community/license/
+
+Hibernate Commons Annotations 4.0.5 (LGPL v2.1) - https://docs.jboss.org/hibernate/stable/annotations/reference/en/html_single/
+https://github.com/hibernate/hibernate-commons-annotations/blob/master/lgpl.txt
+
+JBoss Logging I18n Annotations 1.2.0.Beta1 (LGPL v2.1+) - https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging-annotations/1.2.0.Beta1
+http://repository.jboss.org/licenses/cc0-1.0.txt
+
+Logback 1.1.7 (LGPL v2.1 or EPL v1.0) - https://logback.qos.ch/
+https://logback.qos.ch/license.html

@@ -1,0 +1,186 @@
+###############################################################################
+# Copyright © 2017 Dell Inc. or its subsidiaries.  All Rights Reserved.
+# This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+#
+# Contributors:
+#     Dell Inc. - initial API and implementation
+###############################################################################
+name: "Test-GS1-AC-Drive"
+manufacturer: "Automation Direct"
+model: "GS1-10P5"
+labels: 
+ - "modbus"
+ - "industrial"
+description: "GS1 AC Drive"
+
+deviceResources:
+    -   
+        name: "Test_HoldingRegister_8455"
+        description: "Get the OutputVoltage."
+        attributes: 
+            { type: "doublebyteInt", instance: "8455" }
+        properties: 
+            value:
+                { type: "Float", size: "4", readWrite: "R", precision: "3.2", defaultValue: "0.00", minimum: "0.00", maximum: "300"  }
+            units:
+                { type: "String", readWrite: "R", defaultValue: "rpm" }
+    -   
+        name: "Test_HoldingRegister_8454"
+        description: "Get the RPM."
+        attributes: 
+            { type: "doublebyteInt", instance: "8454" }
+        properties: 
+            value:
+                { type: "Float", size: "4", readWrite: "R", precision: "3.2", defaultValue: "0.00", minimum: "0.00", maximum: "300"  }
+            units:
+                { type: "String", readWrite: "R", defaultValue: "Volts" }
+    -   
+        name: "Test_HoldingRegister_2331"
+        description: "The status of the device."
+        attributes: 
+            { type: "doublebyteInt", instance: "8454" }
+        properties: 
+            value:
+                { type: "Boolean", size: "1", readWrite: "R", defaultValue: "false" }
+            units:
+                { type: "String", readWrite: "R", defaultValue: "OFF" }
+    -
+        name: "enableRandomization"
+        description: "whether generating random value in each collection cycle"
+        properties: 
+            value:
+                { type: "Boolean", size: "1", readWrite: "W", defaultValue: "true" }
+            units:
+                { type: "String", readWrite: "R", defaultValue: "Random" }
+    -
+        name: "collectionFrequency"
+        description: "the frequency of collection"
+        properties: 
+            value:
+                { type: "Integer", size: "4", readWrite: "W", precision: "3", defaultValue: "15", minimum: "0", maximum: "600"  }
+            units:
+                { type: "String", readWrite: "R", defaultValue: "Seconds" }
+                
+resources:
+    -
+        name: "OutputVoltage"
+        get:
+            -
+                { operation: "get", object: "Test_HoldingRegister_8455", property: "value", parameter: "OutputVoltage" }
+        set:
+            -
+                { operation: "set", object: "enableRandomization", property: "value", parameter: "enableRandomization" }
+            -
+                { operation: "set", object: "collectionFrequency", property: "value", parameter: "collectionFrequency" }
+    -
+        name: "RPM"
+        get:
+            -
+                { operation: "get", object: "Test_HoldingRegister_8454", property: "value", parameter: "RPM" }
+        set:
+            -
+                { operation: "set", object: "enableRandomization", property: "value", parameter: "enableRandomization" }
+            -
+                { operation: "set", object: "collectionFrequency", property: "value", parameter: "collectionFrequency" }
+    -   
+        name: "Status"
+        get:
+            -
+                { operation: "get", object: "Test_HoldingRegister_2331", property: "value", parameter: "Status" }
+        set:
+            -
+                { operation: "set", object: "enableRandomization", property: "value", parameter: "enableRandomization" }
+            -
+                { operation: "set", object: "collectionFrequency", property: "value", parameter: "collectionFrequency" }
+
+commands: 
+  - 
+    name: "OutputVoltage"
+    get: 
+        path: "/api/v1/device/{deviceId}/OutputVoltage"
+        responses: 
+          -
+            code: "200"
+            description: ""
+            expectedValues: ["Test_HoldingRegister_8455"]
+          -
+            code: "503"
+            description: "service unavailable"
+            expectedValues: []
+    put: 
+        path: "/api/v1/device/{deviceId}/OutputVoltage"
+        parameterNames: ["enableRandomization","collectionFrequency"]
+        responses:
+          - 
+            code: "204"
+            description: "valid and accepted"
+            expectedValues: []
+          -
+            code: "400"
+            description: "bad request"
+            expectedValues: []
+          -
+            code: "503"
+            description: "service unavailable"
+            expectedValues: []
+  - 
+    name: "Status"
+    get: 
+        path: "/api/v1/device/{deviceId}/Status"
+        responses: 
+          -
+            code: "200"
+            description: ""
+            expectedValues: ["Test_HoldingRegister_2331"]
+          -
+            code: "503"
+            description: "service unavailable"
+            expectedValues: []
+    put: 
+        path: "/api/v1/device/{deviceId}/Status"
+        parameterNames: ["enableRandomization","collectionFrequency"]
+        responses:
+          - 
+            code: "204"
+            description: "valid and accepted"
+            expectedValues: []
+          -
+            code: "400"
+            description: "bad request"
+            expectedValues: []
+          -
+            code: "503"
+            description: "service unavailable"
+            expectedValues: []
+  - 
+    name: "RPM"
+    get: 
+        path: "/api/v1/device/{deviceId}/RPM"
+        responses: 
+          -
+            code: "200"
+            description: ""
+            expectedValues: ["Test_HoldingRegister_8454"]
+          -
+            code: "503"
+            description: "service unavailable"
+            expectedValues: []
+    put: 
+        path: "/api/v1/device/{deviceId}/RPM"
+        parameterNames: ["enableRandomization","collectionFrequency"]
+        responses:
+          - 
+            code: "204"
+            description: "valid and accepted"
+            expectedValues: []
+          -
+            code: "400"
+            description: "bad request"
+            expectedValues: []
+          -
+            code: "503"
+            description: "service unavailable"
+            expectedValues: []
