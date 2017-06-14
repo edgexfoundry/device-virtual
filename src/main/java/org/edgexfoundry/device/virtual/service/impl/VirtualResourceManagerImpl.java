@@ -195,13 +195,12 @@ public class VirtualResourceManagerImpl implements VirtualResourceManager {
 	}
 
 	private void createSchedulerEvent(VirtualResource vr) {
+		Addressable serviceAddressable = deviceServiceProperties.getDeviceService().getAddressable();
 		String name = "device-virtual-vr-" + String.valueOf(vr.getResourceId());
 		String schedule = "interval-for-vr-" + String.valueOf(vr.getResourceId());
 		String parameters = null;
-		String service = "device-virtual";
+		String service = serviceAddressable.getAddress();
 		String path = "/api/v1/collector/" + String.valueOf(vr.getResourceId());
-
-		Addressable serviceAddressable = deviceServiceProperties.getDeviceService().getAddressable();
 
 		Addressable addressable = new Addressable("Schedule-" + name, serviceAddressable.getProtocol(),
 				serviceAddressable.getAddress(), path, serviceAddressable.getPort());
@@ -224,7 +223,7 @@ public class VirtualResourceManagerImpl implements VirtualResourceManager {
 			scheduleEventClient.add(scheduleEvent);
 		} catch (ClientErrorException cee) {
 			logger.info("the schedule event exists in metadata, so update it: " + scheduleEvent.toString());
-			addressableClient.update(addressable);
+			scheduleEventClient.update(scheduleEvent);
 		} catch (Exception e) {
 			logger.error("schedule event for VirtualResource: " + vr.getResourceId() + " created failed", e);
 		}
