@@ -199,7 +199,7 @@ public class VirtualResourceManagerImpl implements VirtualResourceManager {
 		String name = "device-virtual-vr-" + String.valueOf(vr.getResourceId());
 		String schedule = "interval-for-vr-" + String.valueOf(vr.getResourceId());
 		String parameters = null;
-		String service = serviceAddressable.getAddress();
+		String service = deviceServiceProperties.getDeviceService().getName();
 		String path = "/api/v1/collector/" + String.valueOf(vr.getResourceId());
 
 		Addressable addressable = new Addressable("Schedule-" + name, serviceAddressable.getProtocol(),
