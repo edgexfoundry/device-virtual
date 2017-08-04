@@ -36,7 +36,6 @@ public class VirtualAttribute {
 	public VirtualAttribute(Object attributes) {
 		try {
 			Gson gson = new Gson();
-			// 1. Java object to JSON, and save into a file
 			String jsonString = gson.toJson(attributes);
 			VirtualAttribute thisObject = gson.fromJson(jsonString, this.getClass());
 			
@@ -44,7 +43,6 @@ public class VirtualAttribute {
 			this.setType(thisObject.getType());
 			
 		} catch (Exception e) {
-			//e.printStackTrace();
 			logger.error("Cannot Construct VirtualAttribute: " + e.getMessage());
 		}
 	}
