@@ -253,4 +253,11 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<repositories>
+		<repository>
+			<id>org.edgexfoundry</id>
+			<name>EdgeX Foundry Nexus Repository</name>
+			<url>${nexusproxy}/content/groups/public/</url>
+		</repository>
+	</repositories>
 </project>
