@@ -56,3 +56,4 @@ target/
 
 # Test Report
 build/**
+/.apt_generated/

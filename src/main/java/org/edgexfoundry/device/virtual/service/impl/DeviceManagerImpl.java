@@ -30,8 +30,6 @@ import org.edgexfoundry.domain.meta.Device;
 @Service
 public class DeviceManagerImpl implements DeviceManager {
 	
-	//private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	//replace above logger with EdgeXLogger below
 	private final org.edgexfoundry.support.logging.client.EdgeXLogger logger = 
 			org.edgexfoundry.support.logging.client.EdgeXLoggerFactory.getEdgeXLogger(this.getClass());
 
