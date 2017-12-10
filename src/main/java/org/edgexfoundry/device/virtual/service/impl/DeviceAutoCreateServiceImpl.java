@@ -95,8 +95,8 @@ public class DeviceAutoCreateServiceImpl implements DeviceAutoCreateService {
 		device.setService(deviceService);
 		device.setProfile(deviceProfile);
 		device.setName(deviceProfile.getName() + "01");
-		device.setAdminState(AdminState.unlocked);
-		device.setOperatingState(OperatingState.enabled);
+		device.setAdminState(AdminState.UNLOCKED);
+		device.setOperatingState(OperatingState.ENABLED);
 		device.setDescription("Auto-generate this virtual device. " + deviceProfile.getDescription());
 		device.setLabels(deviceProfile.getLabels());
 		createAssociatedAddressable(device);
