@@ -1,0 +1,186 @@
+#%RAML 0.8
+title: device-virtual
+version: v1
+baseUri: "http://device-virtual:49990/api/{version}"
+schemas: 
+    -
+        responseobjects: '{"type":"array","$schema":"http://json-schema.org/draft-03/schema#","title":"responseobjects","items":{"type":"object","required":false,"$ref":"#/schemas/responseobject"}}'
+    - 
+        responseobject: '{"type":"object","$schema":"http://json-schema.org/draft-03/schema#","title":"responseobject","properties":{"ValueDescriptorName":{"type":"object","required":false,"title":"ValueDescriptorName"}}}'        
+    -
+        callbackalert: '{"type": "object","$schema": "http://json-schema.org/draft-03/schema#
+        ","title": "Notification Schema","properties": {"id": {"description": "the identifier of the object which is called back","type": "string"},"actionType": {"description": "the type of the called back object","enum":["PROFILE","DEVICE","PROVISIONWATCHER","SCHEDULE","SCHEDULEEVENT"],"type": "string"},"required": ["id"]}}'
+/ping: 
+    displayName: Ping Resource
+    description: Example--http://localhost:49990/api/v1/ping
+    get: 
+        description: Test service providing an indication that the service is available.
+        displayName: service up check
+        responses: 
+            "200": 
+                description: Return value of "pong."
+            "503": 
+                description: For unknown or unanticipated issues.
+/device/{id}/{command}: 
+    displayName: Command Device (by ID) with Command Name
+    description: Example--http://localhost:49990/api/v1/device/57bd0f2d32d258ad3fcd2d4b/Command
+    uriParameters: 
+        id: 
+            displayName: id
+            type: string
+            required: false
+            repeat: false
+        command: 
+            displayName: command
+            type: string
+            required: false
+            repeat: false
+    get: 
+        description: Issue the GET command referenced by the command to the device/sensor (referenced by database-generated ID) to which it is associated thorugh the Device Service. ServiceException (HTTP 503) for unanticipated or unknown issues encountered. Throws NotFoundException (HTTP 404) if no device exists for the ID provided. Throws LockedException (HTTP 423) if the device or service is locked (admin state) or disabled (operating state).
+        body: 
+            application/json: 
+                schema: responseobject
+                example: '{"VDS-CurrentTemperature": "32.52"}'  
+        responses: 
+            "200": 
+                description: String as returned by the device/sensor through the device service.
+            "404": 
+                description: If no device exists by the ID provided.
+            "423": 
+                description: If the device or service is locked (admin state) or disabled (operating state).
+            "503": 
+                description: For unanticipated or unknown issues encountered.
+    put: 
+        description: Issues the PUT command referenced by the command to the device/sensor (referenced by database-generated ID) to which it is associated through the Device Service. ServiceException (HTTP 503) for unanticipated or unknown issues encountered. Throws NotFoundException (HTTP 404) if no device exists by the ID provided. Throws LockedException (HTTP 423) if the device or service is locked (admin state).
+        body: 
+            application/json: 
+                schema: responseobject
+                example: '{"VDS-CurrentTemperature": "32.52"}'
+        responses: 
+            "200": 
+                description: String as returned by the device/sensor through the Device Service.
+            "404": 
+                description: If no device exists for the ID provided.
+            "423": 
+                description: If the device or service is locked (admin state) or disabled (operating state).
+            "503": 
+                description: For unanticipated or unknown issues encountered.
+    post: 
+        description: Issues the PUT command referenced by the command to the device/sensor (referenced by database generated ID) to which it is associated through the device service. ServiceException (HTTP 503) for unanticipated or unknown issues encountered. Throws NotFoundException (HTTP 404) if no device exists for the ID provided. Throws LockedException (HTTP 423) if the device or service is locked (admin state).
+        body: 
+            application/json: 
+                schema: responseobject
+                example: '{"VDS-CurrentTemperature": "32.52"}'
+        responses: 
+            "200": 
+                description: String as returned by the device/sensor through the Device Service.
+            "404": 
+                description: If no device exists for the ID provided.
+            "423": 
+                description: If the device or service is locked (admin state) or disabled (operating state).
+            "503": 
+                description: For unanticipated or unknown issues encountered.
+/device/all/{command}: 
+    displayName: Command all operational Devices for the service with command name.
+    description: Example--http://localhost:49990/api/v1/device/all/Command
+    uriParameters: 
+        command: 
+            displayName: command
+            type: string
+            required: false
+            repeat: false
+    get: 
+        description: Issues the get command referenced by the command to all operational device(s)/sensor(s) that are associated to the device service and have this command. ServiceException (HTTP 503) for unanticipated or unknown issues encountered. Throws LockedException (HTTP 423) if the device service is locked (admin state).
+        body: 
+            application/json: 
+                schema: responseobjects
+                example: '[{"VDS-CurrentTemperature": "32.52"},{"VDS-CurrentHumidity": "1.0"}]'
+        responses: 
+            "200": 
+                description: String as returned by the device(s)/sensor(s) through the Device Service.
+            "423": 
+                description: If the device service is locked (admin state).
+            "503": 
+                description: For unanticipated or unknown issues encountered.
+    put: 
+        description: Issues the PUT command referenced by the command to all operational device(s)/sensor(s) that are associated to the device service and have this command. ServiceException (HTTP 503) for unanticipated or unknown issues encountered. Throws LockedException (HTTP 423) if the device service is locked (admin state).
+        body: 
+            application/json: 
+                schema: responseobjects
+                example: '[{"VDS-CurrentTemperature": "32.52"},{"VDS-CurrentHumidity": "1.0"}]'
+        responses: 
+            "200": 
+                description: String as returned by the device(s)/sensor(s) through the device service.
+            "423": 
+                description: If the device service is locked (admin state).
+            "503": 
+                description: For unanticipated or unknown issues encountered.
+    post: 
+        description: Issues the put command referenced by the command to all operational device(s)/sensor(s) that are associated to the Device Service and have this command. ServiceException (HTTP 503) for unanticipated or unknown issues encountered. Throws LockedException (HTTP 423) if the device service is locked (admin state).
+        body: 
+            application/json: 
+                schema: responseobjects
+                example: '[{"VDS-CurrentTemperature": "32.52"},{"VDS-CurrentHumidity": "1.0"}]'
+        responses: 
+            "200": 
+                description: String as returned by the device(s)/sensor(s) through the device service.
+            "423": 
+                description: If the device service is locked (admin state).
+            "503": 
+                description: For unanticipated or unknown issues encountered.
+/callback: 
+    displayName: Update Callback
+    description: Example--http://localhost:49990/api/v1/callback
+    post:
+        description: Add the object referred to by the database ID. Returns ServiceException (HTTP 503) for unknown or unanticipated issues. Returns NotFoundException (HTTP 404) if the object cannot be found by the ID provided in metadata.
+        responses: 
+            "200": 
+                description: Boolean indicating success of the operation.
+            "503": 
+                description: For unknown or unanticipated issues.
+            "404": 
+                description: If the object cannot be found by the ID provided. 
+    put: 
+        description: Update the object referred to by the database ID. Returns ServiceException (HTTP 503) for unknown or unanticipated issues. Returns NotFoundException (HTTP 404) if the object cannot be found by the id provided.
+        responses: 
+            "200": 
+                description: Boolean indicating success of the operation.
+            "503": 
+                description: For unknown or unanticipated issues.
+            "404": 
+                description: If the object cannot be found by the ID provided. 
+    delete:
+        description: Delete the object referred to by the database ID. Returns ServiceException (HTTP 503) for unknown or unanticipated issues. Returns NotFoundException (HTTP 404) if the object cannot be found by the ID provided.
+        responses: 
+            "200": 
+                description: Boolean indicating success of the operation.
+            "503": 
+                description: For unknown or unanticipated issues.
+            "404": 
+                description: If the object cannot be found by the ID provided. 
+/discovery: 
+    displayName: Run device discovery request for all registered Provision Watchers
+    description: Example--http://localhost:49990/api/v1/discovery
+    post: 
+        description: Run the discovery request for a Device Service. Does not do anything unlesss the driver functionality is instrumented. Returns ServiceException (HTTP 503) for unknown or unanticipated issues.
+        responses: 
+            "200": 
+                description: The service is running the discovery request.
+            "503": 
+                description: For unknown or unanticipated issues.
+/debug/transformData/{transformData}: 
+    displayName: Set the Device Service data transformation state
+    description: Example--http://localhost:49990/api/v1/debug/transformData/false (sets the device service to not transform data to or from the devices)
+    uriParameters: 
+        transformData: 
+            displayName: transformData
+            type: boolean
+            required: false
+            repeat: false
+    get: 
+        description: Tells the Device Service to pass data modified or unmodified to and from the devices. Returns ServiceException (HTTP 503) for unknown or unanticipated issues. 
+        responses: 
+            "200": 
+                description: Set the data transformation state successfully.
+            "503": 
+                description: For unknown or unanticipated issues.
