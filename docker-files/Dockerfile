@@ -18,7 +18,7 @@
 # FROM java:8
 FROM maven:3.3-jdk-8-alpine
 
-ARG MVN_COMMAND="mvn dependency:copy -q"
+ARG MVN_COMMAND="mvn dependency:copy"
 
 COPY docker-files/pom.xml .
 

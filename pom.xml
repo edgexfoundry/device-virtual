@@ -1,10 +1,10 @@
-<!-- Copyright 2016-2017 Dell Inc. Licensed under the Apache License, Version 
-	2.0 (the "License"); you may not use this file except in compliance with 
-	the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
-	Unless required by applicable law or agreed to in writing, software distributed 
-	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
-	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
-	the specific language governing permissions and limitations under the License. 
+<!-- Copyright 2016-2017 Dell Inc. Licensed under the Apache License, Version
+	2.0 (the "License"); you may not use this file except in compliance with
+	the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+	Unless required by applicable law or agreed to in writing, software distributed
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for
+	the specific language governing permissions and limitations under the License.
 	@microservice: device-virtual @author: Cloud Tsai, Dell @version: 1.0.0 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -16,7 +16,7 @@
 	<description>EdgeX Foundry device-virtual</description>
 
 	<properties>
-		<core-domain.version>0.5.0-SNAPSHOT</core-domain.version>
+		<core-domain.version>0.6.0-SNAPSHOT</core-domain.version>
 		<core-data-client.version>0.5.0-SNAPSHOT</core-data-client.version>
 		<core-metadata-client.version>0.5.0-SNAPSHOT</core-metadata-client.version>
 		<core-exception.version>0.5.0-SNAPSHOT</core-exception.version>
@@ -129,7 +129,7 @@
 			<version>${core-test.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- Mandatory dependencies for using Spock -->
 		<dependency>
 			<groupId>org.spockframework</groupId>
@@ -153,7 +153,7 @@
 			<version>${cglib-nodep.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency> <!-- enables mocking of classes without default constructor (together with 
+		<dependency> <!-- enables mocking of classes without default constructor (together with
 				CGLIB) -->
 			<groupId>org.objenesis</groupId>
 			<artifactId>objenesis</artifactId>
@@ -185,7 +185,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<profiles>
 		<profile>
 			<id>RequiresNone</id>
@@ -213,7 +213,7 @@
 			<plugins>
 				<!-- Mandatory plugins for using Spock -->
 				<plugin>
-					<!-- The gmavenplus plugin is used to compile Groovy code. To learn more 
+					<!-- The gmavenplus plugin is used to compile Groovy code. To learn more
 						about this plugin, visit https://github.com/groovy/GMavenPlus/wiki -->
 					<groupId>org.codehaus.gmavenplus</groupId>
 					<artifactId>gmavenplus-plugin</artifactId>
@@ -257,14 +257,14 @@
 	</build>
 	<repositories>
 		<repository>
-			<id>staging</id>
-			<name>EdgeX Staging Repository</name>
-			<url>${nexusproxy}/${repobasepath}/staging</url>
+			<id>releases</id>
+			<name>EdgeX Release Repository</name>
+			<url>${nexusproxy}/${repobasepath}/releases</url>
 		</repository>
 		<repository>
 			<id>snapshots</id>
 			<name>EdgeX Snapshot Repository</name>
 			<url>${nexusproxy}/${repobasepath}/snapshots</url>
 		</repository>
-	</repositories>	
+	</repositories>
 </project>
